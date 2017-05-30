@@ -1,0 +1,87 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var geom = require(".");
+var RasterMask = (function () {
+    function RasterMask(bounds, lines) {
+        this.northWest = new geom.Offset(bounds.westX, bounds.northY);
+        this.size = new geom.Size(bounds.width, bounds.height);
+        this._lines = lines;
+    }
+    RasterMask.prototype.toString = function () {
+        var shape = '';
+        for (var y = 0; y < this.height; y++) {
+            var line = this._lines[y];
+            var x = this.westX;
+            for (var i = 0; i < line.length; i += 2) {
+                var start = line[i];
+                var end = line[i + 1];
+                while (x < start) {
+                    shape += '∙';
+                    x++;
+                }
+                while (x < end) {
+                    shape += '█';
+                    x++;
+                }
+            }
+            while (x <= this.eastX) {
+                shape += '∙';
+                x++;
+            }
+            shape += '\n';
+        }
+        return this.northWest + "\n" + shape;
+    };
+    Object.defineProperty(RasterMask.prototype, "northY", {
+        // accessors
+        get: function () {
+            return this.northWest.y;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(RasterMask.prototype, "southY", {
+        get: function () {
+            return this.northWest.y + this.size.height - 1;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(RasterMask.prototype, "westX", {
+        get: function () {
+            return this.northWest.x;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(RasterMask.prototype, "eastX", {
+        get: function () {
+            return this.northWest.x + this.size.width - 1;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(RasterMask.prototype, "width", {
+        get: function () {
+            return this.size.width;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(RasterMask.prototype, "height", {
+        get: function () {
+            return this.size.height;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    RasterMask.prototype.bandsAt = function (y, callback) {
+        var line = this._lines[y - this.northY];
+        for (var i = 0; i < line.length; i += 2) {
+            callback(line[i], line[i + 1] - 1);
+        }
+    };
+    return RasterMask;
+}());
+exports.RasterMask = RasterMask;
+//# sourceMappingURL=raster-mask.js.map
