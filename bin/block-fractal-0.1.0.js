@@ -793,7 +793,22 @@ var RasterMask = (function () {
         enumerable: true,
         configurable: true
     });
+    RasterMask.prototype.get = function (x, y) {
+        if (y < this.northY || y > this.southY) {
+            return false;
+        }
+        var line = this._lines[y - this.northY];
+        for (var i = 0; i < line.length; i += 2) {
+            if (x >= line[i] && x < line[i + 1]) {
+                return true;
+            }
+        }
+        return false;
+    };
     RasterMask.prototype.bandsAt = function (y, callback) {
+        if (y < this.northY || y > this.southY) {
+            return;
+        }
         var line = this._lines[y - this.northY];
         for (var i = 0; i < line.length; i += 2) {
             callback(line[i], line[i + 1] - 1);
@@ -1050,6 +1065,8 @@ var geom_1 = __webpack_require__(0);
 exports.Direction = geom_1.Direction;
 exports.DirectionFlags = geom_1.DirectionFlags;
 exports.Offset = geom_1.Offset;
+exports.Path = geom_1.Path;
+exports.RasterMask = geom_1.RasterMask;
 
 
 /***/ })

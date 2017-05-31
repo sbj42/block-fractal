@@ -12,4 +12,6 @@ var geom_1 = require("./geom");
 exports.Direction = geom_1.Direction;
 exports.DirectionFlags = geom_1.DirectionFlags;
 exports.Offset = geom_1.Offset;
+exports.Path = geom_1.Path;
+exports.RasterMask = geom_1.RasterMask;
 //# sourceMappingURL=index.js.map

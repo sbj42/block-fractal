@@ -63,7 +63,23 @@ export class RasterMask implements geom.RectangleLike, geom.SizeLike {
         return this.size.height;
     }
 
+    get(x: number, y: number) {
+        if (y < this.northY || y > this.southY) {
+            return false;
+        }
+        const line = this._lines[y - this.northY];
+        for (let i = 0; i < line.length; i += 2) {
+            if (x >= line[i] && x < line[i + 1]) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     bandsAt(y: number, callback: (westX: number, eastX: number) => void) {
+        if (y < this.northY || y > this.southY) {
+            return;
+        }
         const line = this._lines[y - this.northY];
         for (let i = 0; i < line.length; i += 2) {
             callback(line[i], line[i + 1] - 1);

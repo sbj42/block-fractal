@@ -11,5 +11,6 @@ export declare class RasterMask implements geom.RectangleLike, geom.SizeLike {
     readonly eastX: number;
     readonly width: number;
     readonly height: number;
+    get(x: number, y: number): boolean;
     bandsAt(y: number, callback: (westX: number, eastX: number) => void): void;
 }
