@@ -24,7 +24,7 @@ describe('block-fractal', () => {
             iterations: 1,
             variation: 1,
         });
-        assert.equal(path.toString(), '(-2,-2):NESSENESEESWSWSWNWSSWNNWNENN');
+        assert.equal(path.toString(), '(-2,-2):NESSEEEESSWWWWSSWNNWNNEN');
     });
     it('works with 2 iterations from square, variation 1, seed A', () => {
         const path = BlockFractal.makeBlockFractal({
@@ -33,7 +33,7 @@ describe('block-fractal', () => {
             variation: 1,
         });
         assert.equal(path.toString(), '(-4,-4):'
-            + 'WNEENEESWSWSEESSENNENNESESWSEESENNESSSWWSESWWNWSSESWSWNNWWNWWSESWSESSWNWWNENWNENWNWNNESENNWNEN');
+            + 'WNEEEESSWWSESEENNESSENNESSEENNESSESWWSWWWSSWWNNWWSESSSWWNWWNNNWWNEENNNEN');
     });
     it('works with 4 iterations from square, variation 1, many different seeds', () => {
         for (let i = 0; i < 1000; i ++) {

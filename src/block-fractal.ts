@@ -50,9 +50,11 @@ function verticalHelper(points: geom.Offset[], random: () => number, variation: 
             const v = Math.floor(random() * 2) * 2 - 1;
             const np1 = new geom.Offset(x + v, y);
             const np2 = new geom.Offset(x + v, y + yDir);
-            if (!mask.get(np1) && !mask.get(np2)) {
-                addPoint(newPoints, mask, np1);
-                addPoint(newPoints, mask, np2);
+            if (!mask.get(np2)) {
+                if (!mask.get(np1) || nextToLastMatch(newPoints, np1)) {
+                    addPoint(newPoints, mask, np1);
+                    addPoint(newPoints, mask, np2);
+                }
             }
         }
         addPoint(newPoints, mask, np3);
@@ -89,9 +91,11 @@ function horizontalHelper(points: geom.Offset[], random: () => number, variation
             const v = Math.floor(random() * 2) * 2 - 1;
             const np1 = new geom.Offset(x, y + v);
             const np2 = new geom.Offset(x + xDir, y + v);
-            if (!mask.get(np1) && !mask.get(np2)) {
-                addPoint(newPoints, mask, np1);
-                addPoint(newPoints, mask, np2);
+            if (!mask.get(np2)) {
+                if (!mask.get(np1) || nextToLastMatch(newPoints, np1)) {
+                    addPoint(newPoints, mask, np1);
+                    addPoint(newPoints, mask, np2);
+                }
             }
         }
         addPoint(newPoints, mask, np3);
