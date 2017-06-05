@@ -2,12 +2,12 @@ import * as geom from '.';
 
 export class Mask implements geom.SizeLike {
     private readonly _size = new geom.Size();
-    private readonly _bits: boolean[];
+    private readonly _bits: number[];
     // TODO consider Uint8Array for bits
 
     constructor(size: geom.SizeLike, initialValue = false) {
         this._size.copyFrom(size);
-        this._bits = new Array<boolean>(this._size.area).fill(initialValue);
+        this._bits = new Array<number>(Math.ceil(this._size.area / 32)).fill(initialValue ? 0xffffffff : 0);
     }
 
     // accessors
@@ -38,7 +38,11 @@ export class Mask implements geom.SizeLike {
     }
 
     getAt(index: number) {
-        return this._bits[index];
+        // tslint:disable:no-bitwise
+        const arrayIndex = index >>> 5;
+        const bitMask = 1 << (index & 31);
+        return (this._bits[arrayIndex] & bitMask) !== 0;
+        // tslint:enable:no-bitwise
     }
 
     get(off: geom.OffsetLike) {
@@ -48,7 +52,15 @@ export class Mask implements geom.SizeLike {
     // mutators
 
     setAt(index: number, value: boolean) {
-        this._bits[index] = value;
+        // tslint:disable:no-bitwise
+        const arrayIndex = index >>> 5;
+        const bitMask = 1 << (index & 31);
+        if (value) {
+            this._bits[arrayIndex] |= bitMask;
+        } else {
+            this._bits[arrayIndex] &= ~bitMask;
+        }
+        // tslint:enable:no-bitwise
         return this;
     }
 
