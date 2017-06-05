@@ -7,7 +7,7 @@ var Mask = (function () {
         if (initialValue === void 0) { initialValue = false; }
         this._size = new geom.Size();
         this._size.copyFrom(size);
-        this._bits = new Array(this._size.area).fill(initialValue);
+        this._bits = new Array(Math.ceil(this._size.area / 32)).fill(initialValue ? 0xffffffff : 0);
     }
     // accessors
     Mask.prototype.toString = function () {
@@ -40,14 +40,27 @@ var Mask = (function () {
         return this._size.index(off);
     };
     Mask.prototype.getAt = function (index) {
-        return this._bits[index];
+        // tslint:disable:no-bitwise
+        var arrayIndex = index >>> 5;
+        var bitMask = 1 << (index & 31);
+        return (this._bits[arrayIndex] & bitMask) !== 0;
+        // tslint:enable:no-bitwise
     };
     Mask.prototype.get = function (off) {
         return this.getAt(this.index(off));
     };
     // mutators
     Mask.prototype.setAt = function (index, value) {
-        this._bits[index] = value;
+        // tslint:disable:no-bitwise
+        var arrayIndex = index >>> 5;
+        var bitMask = 1 << (index & 31);
+        if (value) {
+            this._bits[arrayIndex] |= bitMask;
+        }
+        else {
+            this._bits[arrayIndex] &= ~bitMask;
+        }
+        // tslint:enable:no-bitwise
         return this;
     };
     Mask.prototype.set = function (off, value) {
