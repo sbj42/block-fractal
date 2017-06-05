@@ -85,6 +85,23 @@ export class Path {
         return new geom.Rectangle(westX, northY, eastX - westX + 1, southY - northY + 1);
     }
 
+    getArea() {
+        let total = 0;
+        LOCAL_OFF.copyFrom(this.start);
+        for (const segment of this.segments) {
+            LOCAL_OFF.addDirection(segment);
+            switch (segment) {
+            case geom.Direction.NORTH:
+                total -= LOCAL_OFF.x;
+                break;
+            case geom.Direction.SOUTH:
+                total += LOCAL_OFF.x;
+                break;
+            }
+        }
+        return Math.abs(total);
+    }
+
     rasterize(bounds?: geom.RectangleLike): geom.RasterMask {
         const lines = new Array<number[]>();
         if (typeof bounds === 'undefined') {

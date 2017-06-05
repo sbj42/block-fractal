@@ -65,6 +65,38 @@ describe('geom/path', () => {
             assert.equal(p.getIsClosed(), true);
         });
     });
+    describe('#getBounds()', () => {
+        it('works for a simple square', () => {
+            const p = makePath(1, 2, 'NWSE');
+            assert.equal(p.getBounds().toString(), '(0,1 2x2)');
+        });
+        it('works for a more complex shape', () => {
+            //    1 2 3 4 5
+            // 1    .....
+            // 2  ...   .
+            // 3  . ... ...
+            // 4  . . ... .
+            // 5  ...   ...
+            const p = makePath(1, 2, 'ENEESSESSWNWNWSSWNNN');
+            assert.equal(p.getBounds().toString(), '(1,1 5x5)');
+        });
+    });
+    describe('#getArea()', () => {
+        it('works for a simple square', () => {
+            const p = makePath(1, 2, 'NWSE');
+            assert.equal(p.getArea(), 1);
+        });
+        it('works for a more complex shape', () => {
+            //    1 2 3 4 5
+            // 1    .....
+            // 2  ...   .
+            // 3  . ... ...
+            // 4  . . ... .
+            // 5  ...   ...
+            const p = makePath(1, 2, 'ENEESSESSWNWNWSSWNNN');
+            assert.equal(p.getArea(), 10);
+        });
+    });
     describe('#rasterize()', () => {
         it('works for a simple square', () => {
             const p = makePath(1, 2, 'NWSE');

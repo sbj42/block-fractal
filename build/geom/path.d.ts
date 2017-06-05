@@ -8,5 +8,6 @@ export declare class Path {
     getIsClosed(): boolean;
     getOffsets(callback: (off: geom.OffsetLike) => void): void;
     getBounds(): geom.Rectangle;
+    getArea(): number;
     rasterize(bounds?: geom.RectangleLike): geom.RasterMask;
 }

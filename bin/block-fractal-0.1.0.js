@@ -681,6 +681,23 @@ var Path = (function () {
         }
         return new geom.Rectangle(westX, northY, eastX - westX + 1, southY - northY + 1);
     };
+    Path.prototype.getArea = function () {
+        var total = 0;
+        LOCAL_OFF.copyFrom(this.start);
+        for (var _i = 0, _a = this.segments; _i < _a.length; _i++) {
+            var segment = _a[_i];
+            LOCAL_OFF.addDirection(segment);
+            switch (segment) {
+                case geom.Direction.NORTH:
+                    total -= LOCAL_OFF.x;
+                    break;
+                case geom.Direction.SOUTH:
+                    total += LOCAL_OFF.x;
+                    break;
+            }
+        }
+        return Math.abs(total);
+    };
     Path.prototype.rasterize = function (bounds) {
         var lines = new Array();
         if (typeof bounds === 'undefined') {
