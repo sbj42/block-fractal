@@ -125,6 +125,7 @@ function blockFractalIteration(random, points, bounds, variation) {
     };
 }
 function makeBlockFractal(param) {
+    var _a;
     var random = param.random, shape = param.shape, variation = param.variation;
     if (typeof random === 'undefined') {
         random = Math.random;
@@ -171,7 +172,6 @@ function makeBlockFractal(param) {
         }
     }
     return new geom.Path(points[0], segments);
-    var _a;
 }
 exports.makeBlockFractal = makeBlockFractal;
 //# sourceMappingURL=block-fractal.js.map

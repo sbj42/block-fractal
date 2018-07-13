@@ -17,7 +17,7 @@ function sortedInsert(array, value) {
     }
     array.splice(low, 0, value);
 }
-var Path = (function () {
+var Path = /** @class */ (function () {
     function Path(start, segments) {
         this.start = new geom.Offset();
         if (typeof start !== 'undefined') {

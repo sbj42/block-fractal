@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var geom = require(".");
-var RasterMask = (function () {
+var RasterMask = /** @class */ (function () {
     function RasterMask(bounds, lines) {
         this.northWest = new geom.Offset(bounds.westX, bounds.northY);
         this.size = new geom.Size(bounds.width, bounds.height);
