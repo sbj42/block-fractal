@@ -4,6 +4,8 @@
 
 [See the demo](https://sbj42.github.io/projects/block-fractal-demo/www/)
 
+![Example Result](https://raw.githubusercontent.com/sbj42/block-fractal/master/doc/example-new-pletharia.png)
+
 ## Installation
 
 ~~~
