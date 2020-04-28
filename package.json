@@ -13,25 +13,29 @@
   "author": "James Clark <jameswclark@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "test": "mocha --reporter min --require ts-node/register test/*.ts test/**/*.ts",
-    "lint": "tslint --project tsconfig.json",
-    "benchmark": "ts-node bench/bench-block-fractal.ts",
+    "test": "jest",
+    "lint": "eslint \"src/**/*.ts\" && tsc --noEmit",
+    "benchmark": "ts-node benchmark/bench-block-fractal.ts",
     "build": "rimraf bin build && webpack && webpack -p && tsc && rimraf bin/build"
   },
   "devDependencies": {
     "@types/benchmark": "^1.0.31",
-    "@types/mocha": "^5.2.4",
-    "@types/node": "^10.5.2",
-    "@types/seedrandom": "^2.4.27",
+    "@types/jest": "^25.2.1",
+    "@types/node": "^13.13.4",
+    "@types/seedrandom": "^2.4.28",
+    "@typescript-eslint/eslint-plugin": "^2.30.0",
+    "@typescript-eslint/parser": "^2.30.0",
     "benchmark": "^2.1.4",
-    "mocha": "^5.2.0",
-    "rimraf": "^2.6.2",
-    "seedrandom": "^2.4.3",
-    "ts-loader": "^4.4.2",
-    "ts-node": "^7.0.0",
-    "tslint": "^5.10.0",
-    "typescript": "^2.9.2",
-    "webpack": "^4.16.0",
-    "webpack-cli": "^3.0.8"
-  }
+    "eslint": "^6.8.0",
+    "jest": "^25.4.0",
+    "rimraf": "^3.0.2",
+    "seedrandom": "^3.0.5",
+    "ts-jest": "^25.4.0",
+    "ts-loader": "^7.0.1",
+    "ts-node": "^8.9.1",
+    "typescript": "^3.8.3",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11"
+  },
+  "dependencies": {}
 }

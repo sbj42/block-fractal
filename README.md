@@ -1,5 +1,9 @@
 # BlockFractal
 
+![Dependencies](https://img.shields.io/badge/dependencies-none-green.svg)]
+[![Node.js CI](https://github.com/sbj42/block-fractal/workflows/Node.js%20CI/badge.svg)](https://github.com/sbj42/block-fractal/actions?query=workflow%3A%22Node.js+CI%22)
+[![License](https://img.shields.io/github/license/sbj42/block-fractal.svg)](https://github.com/sbj42/the-field)
+
 #### Generates a blocky fractal-like shape, like a tile-based randomized koch curve
 
 [See the demo](https://sbj42.github.io/projects/block-fractal-demo/www/)
