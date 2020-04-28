@@ -1184,4 +1184,4 @@ exports.RasterMask = geom_1.RasterMask;
 /***/ })
 
 /******/ });
-//# sourceMappingURL=block-fractal-1.0.1.js.map
+//# sourceMappingURL=block-fractal-1.0.2.js.map

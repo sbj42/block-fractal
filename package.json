@@ -1,6 +1,6 @@
 {
   "name": "block-fractal",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Generates a blocky fractal-like shape, like a tile-based randomized koch curve",
   "keywords": [
     "fractal",
