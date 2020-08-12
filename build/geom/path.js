@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.Path = void 0;
 var geom = require(".");
 var LOCAL_OFF = new geom.Offset();
 function sortedInsert(array, value) {

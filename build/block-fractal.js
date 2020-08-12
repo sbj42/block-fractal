@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.makeBlockFractal = void 0;
 var geom = require("./geom");
 function nextToLastMatch(points, next) {
     return points.length > 1 && points[points.length - 2].equals(next);

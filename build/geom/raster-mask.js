@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.RasterMask = void 0;
 var geom = require(".");
 var RasterMask = /** @class */ (function () {
     function RasterMask(bounds, lines) {
@@ -37,42 +38,42 @@ var RasterMask = /** @class */ (function () {
         get: function () {
             return this.northWest.y;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(RasterMask.prototype, "southY", {
         get: function () {
             return this.northWest.y + this.size.height - 1;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(RasterMask.prototype, "westX", {
         get: function () {
             return this.northWest.x;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(RasterMask.prototype, "eastX", {
         get: function () {
             return this.northWest.x + this.size.width - 1;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(RasterMask.prototype, "width", {
         get: function () {
             return this.size.width;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(RasterMask.prototype, "height", {
         get: function () {
             return this.size.height;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     RasterMask.prototype.get = function (x, y) {
