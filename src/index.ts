@@ -1,6 +1,6 @@
 /*
- *  WallyFOV
- *  github.com/sbj42/WallyFOV
+ *  BlockFractal
+ *  github.com/sbj42/block-fractal
  *  James Clark
  *  Licensed under the MIT license.
  */
