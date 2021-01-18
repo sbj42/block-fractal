@@ -9,14 +9,14 @@ describe('block-fractal', () => {
             random: seedrandom.alea('A'),
             iterations: 0,
         });
-        assert.equal(path.toString(), '(-1,-1):EESSWWNN');
+        assert.strictEqual(path.toString(), '(-1,-1):EESSWWNN');
     });
     it('works with 1 iteration from square, seed A', () => {
         const path = BlockFractal.makeBlockFractal({
             random: seedrandom.alea('A'),
             iterations: 1,
         });
-        assert.equal(path.toString(), '(-2,-2):ENESEESSSSWWWNWNWNEN');
+        assert.strictEqual(path.toString(), '(-2,-2):ENESEESSSSWWWNWNWNEN');
     });
     it('works with 1 iteration from square, variation 1, seed A', () => {
         const path = BlockFractal.makeBlockFractal({
@@ -24,7 +24,7 @@ describe('block-fractal', () => {
             iterations: 1,
             variation: 1,
         });
-        assert.equal(path.toString(), '(-2,-2):NESSEEEESSWWWWSSWNNWNNEN');
+        assert.strictEqual(path.toString(), '(-2,-2):NESSEEEESSWWWWSSWNNWNNEN');
     });
     it('works with 2 iterations from square, variation 1, seed A', () => {
         const path = BlockFractal.makeBlockFractal({
@@ -32,7 +32,7 @@ describe('block-fractal', () => {
             iterations: 2,
             variation: 1,
         });
-        assert.equal(path.toString(), '(-4,-4):'
+        assert.strictEqual(path.toString(), '(-4,-4):'
             + 'WNEEEESSWWSESEENNESSENNESSEENNESSESWWSWWWSSWWNNWWSESSSWWNWWNNNWWNEENNNEN');
     });
     it('works with 4 iterations from square, variation 1, many different seeds', () => {
