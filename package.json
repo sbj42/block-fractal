@@ -16,7 +16,7 @@
     "test": "jest",
     "lint": "eslint \"src/**/*.ts\" && tsc --noEmit",
     "benchmark": "ts-node benchmark/bench-block-fractal.ts",
-    "build": "rimraf bin build && webpack && webpack --mode production && tsc && rimraf bin/build"
+    "build": "rimraf bin build && webpack --mode development && webpack --mode production && tsc && rimraf bin/build"
   },
   "devDependencies": {
     "@types/benchmark": "^2.1.0",

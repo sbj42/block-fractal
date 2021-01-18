@@ -11,10 +11,10 @@ describe('geom/raster-mask', () => {
                 [1, 2, 3, 4],
                 [2, 4],
             ]);
-            assert.equal(m.westX, 1);
-            assert.equal(m.northY, 2);
-            assert.equal(m.width, 3);
-            assert.equal(m.height, 4);
+            assert.strictEqual(m.westX, 1);
+            assert.strictEqual(m.northY, 2);
+            assert.strictEqual(m.width, 3);
+            assert.strictEqual(m.height, 4);
         });
     });
     describe('#toString()', () => {
@@ -25,7 +25,7 @@ describe('geom/raster-mask', () => {
                 [1, 2, 3, 4],
                 [2, 4],
             ]);
-            assert.equal(m.toString(), `(1,2)
+            assert.strictEqual(m.toString(), `(1,2)
 █∙∙
 ███
 █∙█
@@ -41,14 +41,14 @@ describe('geom/raster-mask', () => {
                 [1, 2, 3, 4],
                 [2, 4],
             ]);
-            assert.equal(m.get(1, 0), false);
-            assert.equal(m.get(1, 2), true);
-            assert.equal(m.get(2, 2), false);
-            assert.equal(m.get(0, 3), false);
-            assert.equal(m.get(5, 3), false);
-            assert.equal(m.get(2, 4), false);
-            assert.equal(m.get(3, 4), true);
-            assert.equal(m.get(4, 4), false);
+            assert.strictEqual(m.get(1, 0), false);
+            assert.strictEqual(m.get(1, 2), true);
+            assert.strictEqual(m.get(2, 2), false);
+            assert.strictEqual(m.get(0, 3), false);
+            assert.strictEqual(m.get(5, 3), false);
+            assert.strictEqual(m.get(2, 4), false);
+            assert.strictEqual(m.get(3, 4), true);
+            assert.strictEqual(m.get(4, 4), false);
         });
     });
     describe('#bandsAt()', () => {
@@ -61,12 +61,12 @@ describe('geom/raster-mask', () => {
             ]);
             let count = 0;
             m.bandsAt(1, () => count++);
-            assert.equal(count, 0);
+            assert.strictEqual(count, 0);
             m.bandsAt(3, () => count++);
-            assert.equal(count, 1);
+            assert.strictEqual(count, 1);
             count = 0;
             m.bandsAt(4, () => count++);
-            assert.equal(count, 2);
+            assert.strictEqual(count, 2);
         });
     });
 });
