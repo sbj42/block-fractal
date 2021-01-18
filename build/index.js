@@ -1,11 +1,12 @@
 "use strict";
 /*
- *  WallyFOV
- *  github.com/sbj42/WallyFOV
+ *  BlockFractal
+ *  github.com/sbj42/block-fractal
  *  James Clark
  *  Licensed under the MIT license.
  */
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.RasterMask = exports.Path = exports.Offset = exports.DirectionFlags = exports.Direction = exports.makeBlockFractal = void 0;
 var block_fractal_1 = require("./block-fractal");
 Object.defineProperty(exports, "makeBlockFractal", { enumerable: true, get: function () { return block_fractal_1.makeBlockFractal; } });
 var geom_1 = require("./geom");
