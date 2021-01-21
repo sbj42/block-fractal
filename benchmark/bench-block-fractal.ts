@@ -3,10 +3,10 @@ import * as seedrandom from 'seedrandom';
 
 import * as BlockFractal from '../src';
 
-// tslint:disable:no-console
+/* eslint-disable no-console */
 
 const suite = new Benchmark.Suite();
-suite.on('cycle', (event: any) => {
+suite.on('cycle', (event: {target: string}) => {
     console.log(`BlockFractal/${event.target}`);
 });
 suite.add('makeBlockFractal([4 iterations])', () => {

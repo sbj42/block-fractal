@@ -1,22 +1,27 @@
 {
   "name": "block-fractal",
-  "version": "1.0.5",
+  "version": "2.0.0",
   "description": "Generates a blocky fractal-like shape, like a tile-based randomized koch curve",
   "keywords": [
     "fractal",
     "roguelike",
     "procedural"
   ],
-  "main": "build/index.js",
-  "typings": "build/index.d.ts",
-  "repository": "https://github.com/sbj42/block-fractal.git",
   "author": "James Clark <jameswclark@gmail.com>",
   "license": "MIT",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "repository": "https://github.com/sbj42/block-fractal.git",
+  "files": [
+    "lib"
+  ],
   "scripts": {
-    "test": "jest",
+    "test": "jest --coverage",
     "lint": "eslint \"src/**/*.ts\" && tsc --noEmit",
-    "benchmark": "ts-node benchmark/bench-block-fractal.ts",
-    "build": "rimraf bin build && webpack --mode development && webpack --mode production && tsc && rimraf bin/build"
+    "build": "rimraf lib && tsc",
+    "dist": "rimraf dist && webpack --mode development && webpack --mode production",
+    "prepublish": "npm run build",
+    "benchmark": "ts-node benchmark/bench-block-fractal.ts"
   },
   "devDependencies": {
     "@types/benchmark": "^2.1.0",
@@ -37,5 +42,7 @@
     "webpack": "^5.15.0",
     "webpack-cli": "^4.3.1"
   },
-  "dependencies": {}
+  "dependencies": {
+    "tiled-geometry": "^1.0.0"
+  }
 }
