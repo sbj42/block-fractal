@@ -1,40 +1,36 @@
-import * as Benchmark from 'benchmark';
-import * as seedrandom from 'seedrandom';
+/* eslint-disable @typescript-eslint/no-var-requires */
+const { benchmark } = require('high-score');
+const seedrandom = require('seedrandom');
 
-import * as BlockFractal from '../src';
+const BlockFractal = require('../lib');
 
 /* eslint-disable no-console */
 
-const suite = new Benchmark.Suite();
-suite.on('cycle', (event: {target: string}) => {
-    console.log(`BlockFractal/${event.target}`);
-});
-suite.add('makeBlockFractal([4 iterations])', () => {
+benchmark('makeBlockFractal-4', () => {
     BlockFractal.makeBlockFractal({
         random: seedrandom.alea('A'),
         iterations: 4,
         variation: 1,
     });
 });
-suite.add('makeBlockFractal([5 iterations])', () => {
+benchmark('makeBlockFractal-5', () => {
     BlockFractal.makeBlockFractal({
         random: seedrandom.alea('A'),
         iterations: 5,
         variation: 1,
     });
 });
-suite.add('makeBlockFractal([6 iterations])', () => {
+benchmark('makeBlockFractal-6', () => {
     BlockFractal.makeBlockFractal({
         random: seedrandom.alea('A'),
         iterations: 6,
         variation: 1,
     });
 });
-suite.add('makeBlockFractal([7 iterations])', () => {
+benchmark('makeBlockFractal-7', () => {
     BlockFractal.makeBlockFractal({
         random: seedrandom.alea('A'),
         iterations: 7,
         variation: 1,
     });
 });
-suite.run();
