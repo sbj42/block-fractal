@@ -1,0 +1,116 @@
+body {
+    font-family: 'Electrolize', serif;
+    margin: 0px;
+    background: #ffe;
+}
+
+#top {
+    text-align: center;
+    background: #489032;
+    padding: 5px;
+    color: #ebf8ff;
+    box-shadow: 0px 2px 6px #888;
+}
+#credit {
+    position: absolute;
+    right: 10px;
+    top: 0px;
+    font-family: 'Nunito', Verdana, sans-serif;
+    font-size: 14px;
+}
+#credit a {
+    color: #ebf8ff;
+    opacity: 0.8;
+}
+
+#title {
+    font-size: 40px;
+    font-weight: normal;
+    margin: 0px;
+}
+
+#subtitle {
+    font-family: 'Nunito', Verdana, sans-serif;
+    font-size: 18px;
+    margin: 0px;
+}
+
+#controls {
+    padding-top: 20px;
+    font-family: 'Nunito', Verdana, sans-serif;
+    text-align: center;
+}
+#controls input {
+    font-family: 'Nunito', Verdana, sans-serif;
+}
+
+#demo {
+    padding-top: 10px;
+}
+#demoinner {
+    width: 1158px;
+    height: 608px;
+    box-shadow: 3px 3px 8px rgba(0,0,0,0.8);
+    margin: 0px auto;
+    position: relative;
+    cursor: move;
+    cursor: grab;
+    cursor: -moz-grab;
+    cursor: -webkit-grab;
+}
+#label {
+    user-select: none;
+    font-family: 'Tangerine', cursive;
+    font-size: 50px;
+    color: #ffd;
+    text-shadow: 2px 2px 2px #444;
+    position: absolute;
+    top: 10px;
+    left: 50px;
+    right: 50px;
+    text-align: center;
+}
+
+#zoomout {
+    opacity: 0.6;
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    cursor: default;
+}
+#zoomin {
+    opacity: 0.6;
+    position: absolute;
+    top: 48px;
+    left: 16px;
+    cursor: default;
+}
+#zoomout:hover, #zoomin:hover {
+    opacity: 1;
+}
+
+#desc {
+    font-family: 'Nunito', Verdana, sans-serif;
+    max-width: 1084px;
+    margin: 0px auto;
+    margin-bottom: 100px;
+}
+#desc h2 {
+    font-family: 'Electrolize', Verdana, sans-serif;
+}
+#desc p {
+    max-width: 600px;
+}
+#link {
+    float: right;
+    background: #3498db;
+    margin-top: 30px;
+    box-shadow: 4px 4px 4px #888;
+}
+#link a {
+    font-size: 31px;
+    padding: 20px;
+    color: #fff;
+    text-decoration: none;
+    line-height: 2em;
+}

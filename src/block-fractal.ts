@@ -1,9 +1,11 @@
-import * as geom from './geom';
+import * as geom from 'tiled-geometry';
+
+/* eslint-disable indent */
 
 export interface BlockFractalParam {
     random?: () => number;
     iterations: number;
-    shape?: geom.Path;
+    shape?: geom.CardinalPath;
     variation?: number;
 }
 
@@ -11,17 +13,17 @@ function nextToLastMatch(points: geom.Offset[], next: geom.Offset) {
     return points.length > 1 && points[points.length - 2].equals(next);
 }
 
-function addPoint(points: geom.Offset[], mask: geom.MaskRect, next: geom.Offset) {
+function addPoint(points: geom.Offset[], mask: geom.MaskRectangle, next: geom.Offset) {
     if (nextToLastMatch(points, next)) {
-        mask.set(points.splice(points.length - 1, 1)[0], false);
+        mask.setAtOffset(points.splice(points.length - 1, 1)[0], false);
     } else {
         points.push(next);
-        mask.set(next, true);
+        mask.setAtOffset(next, true);
     }
 }
 
 function verticalHelper(points: geom.Offset[], random: () => number, variation: number,
-                        newPoints: geom.Offset[], mask: geom.MaskRect, i: number,
+                        newPoints: geom.Offset[], mask: geom.MaskRectangle, i: number,
                         p1: geom.Offset, p2: geom.Offset) {
     const x = 2 * p1.x;
     const yDir = p2.y - p1.y;
@@ -32,16 +34,16 @@ function verticalHelper(points: geom.Offset[], random: () => number, variation: 
             // This can happen around a corner, when just before the corner
             // we dip into the corner
             // console.info(` remove ${newPoints[newPoints.length - 1]}`);
-            mask.set(newPoints.splice(newPoints.length - 1, 1)[0], false);
+            mask.setAtOffset(newPoints.splice(newPoints.length - 1, 1)[0], false);
             continue;
         }
-        if (i === points.length - 2 && mask.get(np3)) {
+        if (i === points.length - 2 && mask.getAtOffset(np3)) {
             // This can happen if the first point was on a corner and the
             // first move was to dip into the corner
             const index = newPoints.findIndex((point) => point.equals(np3));
             // console.info(`remove ${index} from beginning`);
             for (const point of newPoints.splice(0, index)) {
-                mask.set(point, false);
+                mask.setAtOffset(point, false);
             }
             addPoint(newPoints, mask, np3);
             break;
@@ -50,8 +52,8 @@ function verticalHelper(points: geom.Offset[], random: () => number, variation: 
             const v = Math.floor(random() * 2) * 2 - 1;
             const np1 = new geom.Offset(x + v, y);
             const np2 = new geom.Offset(x + v, y + yDir);
-            if (!mask.get(np2)) {
-                if (!mask.get(np1) || nextToLastMatch(newPoints, np1)) {
+            if (!mask.getAtOffset(np2)) {
+                if (!mask.getAtOffset(np1) || nextToLastMatch(newPoints, np1)) {
                     addPoint(newPoints, mask, np1);
                     addPoint(newPoints, mask, np2);
                 }
@@ -62,7 +64,7 @@ function verticalHelper(points: geom.Offset[], random: () => number, variation: 
 }
 
 function horizontalHelper(points: geom.Offset[], random: () => number, variation: number,
-                          newPoints: geom.Offset[], mask: geom.MaskRect, i: number,
+                          newPoints: geom.Offset[], mask: geom.MaskRectangle, i: number,
                           p1: geom.Offset, p2: geom.Offset) {
     const y = 2 * p1.y;
     const xDir = p2.x - p1.x;
@@ -73,16 +75,16 @@ function horizontalHelper(points: geom.Offset[], random: () => number, variation
             // This can happen around a corner, when just before the corner
             // we dip in the direction of the corner
             // console.info(` remove ${newPoints[newPoints.length - 1]}`);
-            mask.set(newPoints.splice(newPoints.length - 1, 1)[0], false);
+            mask.setAtOffset(newPoints.splice(newPoints.length - 1, 1)[0], false);
             continue;
         }
-        if (i === points.length - 2 && mask.get(np3)) {
+        if (i === points.length - 2 && mask.getAtOffset(np3)) {
             // This can happen if the first point was on a corner and the
             // first move was to dip into the corner
             const index = newPoints.findIndex((point) => point.equals(np3));
             // console.info(`remove ${index} from beginning`);
             for (const point of newPoints.splice(0, index)) {
-                mask.set(point, false);
+                mask.setAtOffset(point, false);
             }
             addPoint(newPoints, mask, np3);
             break;
@@ -91,8 +93,8 @@ function horizontalHelper(points: geom.Offset[], random: () => number, variation
             const v = Math.floor(random() * 2) * 2 - 1;
             const np1 = new geom.Offset(x, y + v);
             const np2 = new geom.Offset(x + xDir, y + v);
-            if (!mask.get(np2)) {
-                if (!mask.get(np1) || nextToLastMatch(newPoints, np1)) {
+            if (!mask.getAtOffset(np2)) {
+                if (!mask.getAtOffset(np1) || nextToLastMatch(newPoints, np1)) {
                     addPoint(newPoints, mask, np1);
                     addPoint(newPoints, mask, np2);
                 }
@@ -112,7 +114,7 @@ function blockFractalIteration(random: () => number, points: geom.Offset[],
         bounds.height * 2 + 2,
     );
     // console.info(` bounds ${newBounds}`);
-    const mask = new geom.MaskRect(newBounds);
+    const mask = new geom.MaskRectangle(newBounds);
     for (let i = 0; i < points.length - 1; i ++) {
         const p1 = points[i];
         const p2 = points[i + 1];
@@ -131,21 +133,21 @@ function blockFractalIteration(random: () => number, points: geom.Offset[],
     };
 }
 
-export function makeBlockFractal(param: BlockFractalParam): geom.Path {
+export function makeBlockFractal(param: BlockFractalParam): geom.CardinalPath {
     let {random, shape, variation} = param;
     if (typeof random === 'undefined') {
         random = Math.random;
     }
     if (typeof shape === 'undefined') {
-        shape = new geom.Path({x: -1, y: -1}, [
-            geom.Direction.EAST,
-            geom.Direction.EAST,
-            geom.Direction.SOUTH,
-            geom.Direction.SOUTH,
-            geom.Direction.WEST,
-            geom.Direction.WEST,
-            geom.Direction.NORTH,
-            geom.Direction.NORTH,
+        shape = new geom.CardinalPath({x: -1, y: -1}, [
+            geom.CardinalDirection.EAST,
+            geom.CardinalDirection.EAST,
+            geom.CardinalDirection.SOUTH,
+            geom.CardinalDirection.SOUTH,
+            geom.CardinalDirection.WEST,
+            geom.CardinalDirection.WEST,
+            geom.CardinalDirection.NORTH,
+            geom.CardinalDirection.NORTH,
         ]);
     }
     if (typeof variation === 'undefined') {
@@ -154,29 +156,29 @@ export function makeBlockFractal(param: BlockFractalParam): geom.Path {
 
     let points = new Array<geom.Offset>();
     let bounds = shape.getBounds();
-    shape.getOffsets((off) => {
+    for (const off of shape.offsets()) {
         points.push(new geom.Offset(off.x, off.y));
-    });
+    }
 
     for (let iter = 0; iter < param.iterations; iter ++) {
         // console.info(`iteration ${iter + 1}`);
         ({points, bounds} = blockFractalIteration(random, points, bounds, variation));
     }
 
-    const segments = new Array<geom.Direction>();
+    const segments = new Array<geom.CardinalDirection>();
     for (let i = 0; i < points.length - 1; i ++) {
         const curPoint = points[i];
         const nextPoint = points[i + 1];
         if (nextPoint.y === curPoint.y - 1) {
-            segments.push(geom.Direction.NORTH);
+            segments.push(geom.CardinalDirection.NORTH);
         } else if (nextPoint.x === curPoint.x + 1) {
-            segments.push(geom.Direction.EAST);
+            segments.push(geom.CardinalDirection.EAST);
         } else if (nextPoint.y === curPoint.y + 1) {
-            segments.push(geom.Direction.SOUTH);
+            segments.push(geom.CardinalDirection.SOUTH);
         } else if (nextPoint.x === curPoint.x - 1) {
-            segments.push(geom.Direction.WEST);
+            segments.push(geom.CardinalDirection.WEST);
         }
     }
 
-    return new geom.Path(points[0], segments);
+    return new geom.CardinalPath(points[0], segments);
 }
