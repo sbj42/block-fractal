@@ -258,7 +258,7 @@ demoInner.onwheel = (event: WheelEvent) => {
     if (mouseOver) {
         const x = centerX + (event.offsetX - (width >>> 1)) / zoom;
         const y = centerY + (event.offsetY - (height >>> 1)) / zoom;
-        targetZoom *= Math.pow(ZOOM_SPEED, event.deltaY / 120);
+        targetZoom *= Math.pow(ZOOM_SPEED, - event.deltaY / 120);
         targetCenterX = x - (event.offsetX - (width >>> 1)) / targetZoom;
         targetCenterY = y - (event.offsetY - (height >>> 1)) / targetZoom;
         event.preventDefault();
